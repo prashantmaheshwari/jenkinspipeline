@@ -31,6 +31,7 @@ pipeline {
                 }
    
             }
+     }
       stage ('Continous Inspection'){
           steps{
                 build job: 'Continuous Inspection'
@@ -39,8 +40,7 @@ pipeline {
                 success {
                     echo 'Inspection....'
                 }  
-     }
-        
+            }
+        }
     }
-   
  }
