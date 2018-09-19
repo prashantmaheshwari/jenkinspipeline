@@ -1,7 +1,6 @@
 pipeline {
     agent any
-
-stages{
+    stages{
         stage('Build'){
             steps {
                 sh 'mvn clean package'
@@ -13,13 +12,5 @@ stages{
                 }
             }
         }
-
-                stage ('Deploy_to_Staging'){
-                    steps {
-                         build job: 'Deploy-to-Staging'
-                       
-                    }
-               }
-           }
-         
-        }
+     }
+}
