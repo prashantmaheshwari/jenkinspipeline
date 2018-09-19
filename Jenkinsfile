@@ -16,7 +16,7 @@ stages{
 
                 stage ('Deploy_to_Staging'){
                     steps {
-                         build job: 'Deploy_to_Staging'
+                         build job: 'Deploy-to-Staging'
                        
                     }
                }
