@@ -23,16 +23,7 @@ pipeline {
                 }  
             }
         }
-        stage ('Nexus Artifactory Manager'){
-          steps{
-                build job: 'Nexus_Repo'
-            }
-            post {
-                success {
-                    echo 'Inspection....'
-                }  
-            }
-        }
+       
      stage ('Deploy to staging'){
             steps{
                 timeout(time:5, unit:'DAYS'){
