@@ -23,6 +23,16 @@ pipeline {
                 }  
             }
         }
+         stage ('Nexus_Repository'){
+          steps{
+                build job: 'Nexus_Repo'
+            }
+            post {
+                success {
+                    echo 'Artifacts Saved....'
+                }  
+            }
+        }
        
      stage ('Deploy to staging'){
             steps{
