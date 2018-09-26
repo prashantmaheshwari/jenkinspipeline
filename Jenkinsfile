@@ -48,6 +48,16 @@ pipeline {
                      }  
             }
         }
+        stage ('Automation testing'){
+          steps{
+                build job: 'Selenium_Testing'
+            }
+            post {
+                success {
+                    echo 'Testing Successfull....'
+                }  
+            }
+        }
        
      stage ('Deploy to Production-AWS'){
             steps{
