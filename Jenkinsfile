@@ -36,11 +36,7 @@ pipeline {
        
      stage ('Deploy to staging'){
             steps{
-                timeout(time:5, unit:'DAYS'){
-                    input message:'Approve Deployment?'
-                }
-
-                build job: 'Deploy-to-staging'
+                 build job: 'Deploy-to-staging'
             }
             post {
                 success {
@@ -48,7 +44,26 @@ pipeline {
                 }
 
                 failure {
-                    echo ' Deployment failed.'
+                    echo ' Deployment failed on Staging.'
+                     }  
+            }
+        }
+       
+     stage ('Deploy to Production-AWS'){
+            steps{
+                timeout(time:2, unit:'DAYS'){
+                    input message:'Approve Production Deployment?'
+                }
+
+                build job: 'Deploy-to-prod(AWS)'
+            }
+            post {
+                success {
+                    echo 'Code deployed to Production.'
+                }
+
+                failure {
+                    echo ' Deployment failed on Production.'
         
                 }
    
