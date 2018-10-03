@@ -22,6 +22,19 @@
   </modules>
 
   <distributionManagement>
+           
+           
+      <repository>
+    <id>tomcat</id>
+    <url>http://localhost:8082/nexus/content/repositories/tomcat</url>
+  </repository>
+
+  <snapshotRepository>
+    <id>snapshots</id>
+    <url>http://localhost:8082/nexus/content/repositories/snapshots</url>
+  </snapshotRepository>
+           
+           
     <site>
       <id>site-server</id>
       <name>Test Project Site</name>
