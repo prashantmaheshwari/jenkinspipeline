@@ -14,7 +14,7 @@ pipeline {
         }
         stage ('Deploy to UAT'){
             steps {
-                build job: 'Deploy-to-staging'
+                build job: 'Deploy-to-UAT'
             }
         }
     }
