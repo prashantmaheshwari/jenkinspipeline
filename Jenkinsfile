@@ -34,7 +34,7 @@ pipeline {
             }
         }
        
-      stage ('Deploy to Staging){
+      stage ('Deploy to Staging'){
             steps{
                 timeout(time:2, unit:'DAYS'){
                     input message:'Approve Deployment?'
