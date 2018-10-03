@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage('Build'){
             steps {
-                bat 'mvn clean package'
+                sh 'mvn clean package'
             }
             post {
                 success {
@@ -13,9 +13,9 @@ pipeline {
             }
         }
         
-        stage ('Continous Inspection'){
+        stage ('Continuous Inspection'){
           steps{
-                build job: 'Continuous Inspection'
+                build job: 'Continuous Inspection(SonarQube)'
             }
             post {
                 success {
@@ -25,7 +25,7 @@ pipeline {
         }
          stage ('Nexus_Repository'){
           steps{
-                build job: 'Nexus_Repo'
+                build job: 'Nexus_Repository'
             }
             post {
                 success {
@@ -34,9 +34,13 @@ pipeline {
             }
         }
        
-     stage ('Deploy to staging'){
+      stage ('Deploy to Staging){
             steps{
-                 build job: 'Deploy-to-staging'
+                timeout(time:2, unit:'DAYS'){
+                    input message:'Approve Deployment?'
+                }
+
+                build job: 'Deploy-to-Staging'
             }
             post {
                 success {
@@ -44,36 +48,7 @@ pipeline {
                 }
 
                 failure {
-                    echo ' Deployment failed on Staging.'
-                     }  
-            }
-        }
-        stage ('Automation testing'){
-          steps{
-                build job: 'Selenium_Testing'
-            }
-            post {
-                success {
-                    echo 'Testing Successfull....'
-                }  
-            }
-        }
-       
-     stage ('Deploy to Production-AWS'){
-            steps{
-                timeout(time:2, unit:'DAYS'){
-                    input message:'Approve Production Deployment?'
-                }
-
-                build job: 'Deploy-to-prod(AWS)'
-            }
-            post {
-                success {
-                    echo 'Code deployed to Production.'
-                }
-
-                failure {
-                    echo ' Deployment failed on Production.'
+                    echo ' Deployment failed on Staging'
         
                 }
    
